@@ -2,8 +2,8 @@ package wcs.blog.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import wcs.blog.models.Users;
+import wcs.blog.model.User;
 
-public interface UsersRepository extends JpaRepository<Users, Long> {
+public interface UsersRepository extends JpaRepository<User, Long> {
 
 }

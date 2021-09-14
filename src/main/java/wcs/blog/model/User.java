@@ -1,4 +1,4 @@
-package wcs.blog.models;
+package wcs.blog.model;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Users {
+public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,10 +50,10 @@ public class Users {
 	private Set<Role> roles = new HashSet<>();
 	
 	@OneToMany(mappedBy = "user")
-	private List<Articles> articles = new ArrayList<>();
+	private List<Article> articles = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "user")
-	private List<Comments> comments = new ArrayList<>();
+	private List<Comment> comments = new ArrayList<>();
 
 	public Long getId() {
 		return id;

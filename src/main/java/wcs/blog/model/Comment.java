@@ -1,8 +1,6 @@
-package wcs.blog.models;
+package wcs.blog.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,21 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+
 
 @Entity
-public class Articles {
-
+public class Comment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@NotBlank(message = "L'intitulé est obligatoire")
-	@Size(max = 100)
-	private String title;
 
 	@Lob
 	@NotEmpty
@@ -37,10 +29,12 @@ public class Articles {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId")
 	@NotBlank
-	private Users user;
+	private User user;
 	
-	@OneToMany(mappedBy = "post")
-	private List<Comments> comments = new ArrayList<>();
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "articleId")
+	@NotBlank
+	private Article post;
 
 	public Long getId() {
 		return id;
@@ -48,14 +42,6 @@ public class Articles {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getContent() {
@@ -74,11 +60,19 @@ public class Articles {
 		this.createdOn = createdOn;
 	}
 
-	public Users getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(Users user) {
+	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Article getPost() {
+		return post;
+	}
+
+	public void setPost(Article post) {
+		this.post = post;
 	}
 }
