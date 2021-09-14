@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException.NotFound;
 
@@ -24,12 +25,15 @@ public class AuthService {
 	@Autowired
 	RoleRepository roleRepository;
 	
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
 	public void register(RegisterRequest registerRequest) {
 		
 		User user = new User();
 		user.setUsername(registerRequest.getUsername());
 		user.setEmail(registerRequest.getEmail());
-		user.setPassword(registerRequest.getPassword());
+		user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 		
 		Set<Role> roles = new HashSet<>();
 		Role userRole = roleRepository.findByName(ERole.ROLE_USER)

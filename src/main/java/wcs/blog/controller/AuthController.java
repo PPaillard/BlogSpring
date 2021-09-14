@@ -26,9 +26,9 @@ public class AuthController {
         try {
 			authService.register(registerRequest);
 		} catch (Exception e) {
-			return ResponseEntity.badRequest().body(e);
+			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
 }

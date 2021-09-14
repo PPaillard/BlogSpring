@@ -1,5 +1,6 @@
 package wcs.blog.dto;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -11,6 +12,7 @@ public class RegisterRequest {
 	
 	@NotBlank
 	@Size(max = 100)
+	@Email
 	private  String email;
 	
 	@NotBlank
