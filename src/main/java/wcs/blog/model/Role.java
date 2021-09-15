@@ -1,5 +1,8 @@
 package wcs.blog.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +15,9 @@ public class Role {
 	@Enumerated(EnumType.STRING)
 	@Column(length = 15)
 	private ERole name;
+	
+	@ManyToMany(mappedBy = "roles")
+	private Set<User> users = new HashSet<>();
 
 	public Role() {}
 
@@ -33,5 +39,13 @@ public class Role {
 
 	public void setName(ERole name) {
 		this.name = name;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 }

@@ -22,11 +22,11 @@ public class AuthController {
 	
 	
 	@PostMapping("/register")
-    public ResponseEntity register(@Valid @RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest registerRequest) {
         try {
 			authService.register(registerRequest);
 		} catch (Exception e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
 		}
         return new ResponseEntity<>(HttpStatus.CONFLICT);
     }

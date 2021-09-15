@@ -3,38 +3,36 @@ package wcs.blog.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Comment {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Lob
-	@NotEmpty
-	private String content;
-
-	private Date createdOn;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "userId")
-	@NotBlank
-	private User user;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "articleId")
+	@NotNull
 	@NotBlank
-	private Article post;
+	@Size(max = 255)
+	private String message;
+	
+	private Date creationDate;
+	
+	@ManyToOne
+	@JoinColumn(name = "articleId")
+	private Article article;
+	
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	private User user;
 
 	public Long getId() {
 		return id;
@@ -44,20 +42,28 @@ public class Comment {
 		this.id = id;
 	}
 
-	public String getContent() {
-		return content;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
-	public Date getCreatedOn() {
-		return createdOn;
+	public Date getCreationDate() {
+		return creationDate;
 	}
 
-	public void setCreatedOn(Date createdOn) {
-		this.createdOn = createdOn;
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArticle(Article article) {
+		this.article = article;
 	}
 
 	public User getUser() {
@@ -68,11 +74,4 @@ public class Comment {
 		this.user = user;
 	}
 
-	public Article getPost() {
-		return post;
-	}
-
-	public void setPost(Article post) {
-		this.post = post;
-	}
 }

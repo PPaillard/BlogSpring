@@ -56,10 +56,10 @@ public class User {
 	private Set<Role> roles = new HashSet<>();
 	
 	@OneToMany(mappedBy = "user")
-	private List<Article> articles = new ArrayList<>();
+	private Set<Article> articles = new HashSet<Article>();
 	
 	@OneToMany(mappedBy = "user")
-	private List<Comment> comments = new ArrayList<>();
+	private Set<Comment> comments = new HashSet<Comment>();
 
 	public Long getId() {
 		return id;
@@ -99,5 +99,13 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public Set<Article> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(Set<Article> articles) {
+		this.articles = articles;
 	}
 }
