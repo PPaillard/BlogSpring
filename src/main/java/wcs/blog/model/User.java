@@ -108,4 +108,10 @@ public class User {
 	public void setArticles(Set<Article> articles) {
 		this.articles = articles;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", roles="
+				+ roles + ", articles=" + articles + ", comments=" + comments + "]";
+	}
 }

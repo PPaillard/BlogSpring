@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,13 +33,14 @@ public class Article {
 
 	@Lob
 	@NotEmpty
+	@NotNull
 	private String content;
 
 	private Date createdOn;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "userId")
-	@NotBlank
+	@NotNull
 	private User user;
 	
 	@OneToMany(mappedBy = "article")
