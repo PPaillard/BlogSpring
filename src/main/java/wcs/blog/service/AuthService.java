@@ -20,6 +20,7 @@ import wcs.blog.model.ERole;
 import wcs.blog.model.Role;
 import wcs.blog.repository.RoleRepository;
 import wcs.blog.repository.UsersRepository;
+import wcs.blog.security.jwt.JwtUtils;
 
 @Service
 public class AuthService {
@@ -35,6 +36,9 @@ public class AuthService {
 	
 	@Autowired
 	AuthenticationManager authenticationManager;
+	
+	@Autowired
+	JwtUtils jwtUtils;
 	
 	public void register(RegisterRequest registerRequest) throws Exception {
 		
@@ -63,12 +67,14 @@ public class AuthService {
 		usersRepository.save(user);
 	}
 	
-	public void login(LoginRequest loginRequest) {
+	public String login(LoginRequest loginRequest) {
 		
 		Authentication authentication =  authenticationManager.authenticate( 
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
+		
+		return jwtUtils.generateJwtToken(authentication);
 		
 	}
 }

@@ -21,6 +21,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(uniqueConstraints = { 
 		@UniqueConstraint(columnNames = "username"),
@@ -46,6 +48,7 @@ public class User {
 	@NotBlank(message = "Le mot de passe est obligatoire")
 	@Size(max = 120)
 	@NotNull
+	@JsonIgnore
 	private String password;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -56,9 +59,11 @@ public class User {
 	private Set<Role> roles = new HashSet<>();
 	
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private Set<Article> articles = new HashSet<Article>();
 	
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private Set<Comment> comments = new HashSet<Comment>();
 
 	public Long getId() {

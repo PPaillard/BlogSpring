@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Role {
 	@Id
@@ -16,7 +18,9 @@ public class Role {
 	@Column(length = 15)
 	private ERole name;
 	
+	
 	@ManyToMany(mappedBy = "roles")
+	@JsonIgnore
 	private Set<User> users = new HashSet<>();
 
 	public Role() {}

@@ -40,11 +40,11 @@ public class AuthController {
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest){
 		
-		authService.login(loginRequest);
+		String tokenJwt = authService.login(loginRequest);
 		
 		// TODO logger l'utilisateur
 		
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(tokenJwt, HttpStatus.OK);
 		
 	}
 	

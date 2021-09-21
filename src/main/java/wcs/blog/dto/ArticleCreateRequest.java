@@ -14,11 +14,6 @@ public class ArticleCreateRequest {
 	@NotBlank
 	@NotNull
 	private String content;
-	
-	@NotNull
-	private Long idUser;
-	
-	
 
 	public String getTitle() {
 		return title;
@@ -36,17 +31,8 @@ public class ArticleCreateRequest {
 		this.content = content;
 	}
 
-	public Long getIdUser() {
-		return idUser;
-	}
-
-	public void setIdUser(Long idUser) {
-		this.idUser = idUser;
-	}
-
 	@Override
 	public String toString() {
-		return "ArticleCreateRequest [title=" + title + ", content=" + content + ", idUser=" + idUser + "]";
+		return "ArticleCreateRequest [title=" + title + ", content=" + content + "]";
 	}
-
 }
