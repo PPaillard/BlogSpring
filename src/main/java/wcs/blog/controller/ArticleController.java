@@ -1,5 +1,6 @@
 package wcs.blog.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -22,7 +23,6 @@ import wcs.blog.service.ArticleService;
 
 @RestController
 @RequestMapping("/api/article")
-@CrossOrigin
 public class ArticleController {
 	
 	@Autowired
@@ -30,6 +30,11 @@ public class ArticleController {
 	
 	@Autowired
 	ArticlesRepository articlesRepository;
+	
+	@GetMapping
+	public List<Article> getAll(){
+		return articlesRepository.findAll();
+	}
 
 	@PostMapping("/create")
 	public ResponseEntity<?> create(@Valid @RequestBody ArticleCreateRequest articleCreateRequest){		

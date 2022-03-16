@@ -1,8 +1,6 @@
 package wcs.blog.model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -14,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
@@ -65,6 +65,11 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	@JsonIgnore
 	private Set<Comment> comments = new HashSet<Comment>();
+	
+	@PreRemove
+	public void majArticleBeforeRemove() {
+		this.articles.forEach(article -> article.setUser(null));
+	}
 
 	public Long getId() {
 		return id;

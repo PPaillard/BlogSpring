@@ -40,7 +40,6 @@ public class Article {
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "userId")
-	@NotNull
 	private User user;
 	
 	@OneToMany(mappedBy = "article")
