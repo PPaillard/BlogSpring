@@ -1,5 +1,6 @@
 package wcs.blog.service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 
@@ -34,7 +35,7 @@ public class ArticleService {
 		Article article = new Article();
 		article.setTitle(articleCreateRequest.getTitle());
 		article.setContent(articleCreateRequest.getContent());
-		article.setCreatedOn(new Date());
+		article.setCreatedOn(LocalDateTime.now());
 		article.setUser(user);
 		articlesRepository.save(article);
 	}

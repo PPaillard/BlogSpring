@@ -7,7 +7,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import wcs.blog.dto.ArticleCreateRequest;
 import wcs.blog.model.Article;
+import wcs.blog.repository.ArticlesRepository;
 import wcs.blog.service.ArticleService;
 
 @RestController
@@ -27,11 +27,12 @@ public class ArticleController {
 	
 	@Autowired
 	ArticleService articleService;
+	
+	@Autowired
+	ArticlesRepository articlesRepository;
 
 	@PostMapping("/create")
-	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<?> create(@Valid @RequestBody ArticleCreateRequest articleCreateRequest){
-		
+	public ResponseEntity<?> create(@Valid @RequestBody ArticleCreateRequest articleCreateRequest){		
 		articleService.create(articleCreateRequest);
 		
 		return new ResponseEntity<>(HttpStatus.CREATED);

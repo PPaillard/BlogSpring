@@ -1,6 +1,6 @@
 package wcs.blog.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +24,7 @@ public class Comment {
 	@Size(max = 255)
 	private String message;
 	
-	private Date creationDate;
+	private LocalDateTime creationDate;
 	
 	@ManyToOne
 	@JoinColumn(name = "articleId")
@@ -50,11 +50,11 @@ public class Comment {
 		this.message = message;
 	}
 
-	public Date getCreationDate() {
+	public LocalDateTime getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(LocalDateTime creationDate) {
 		this.creationDate = creationDate;
 	}
 
